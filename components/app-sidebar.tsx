@@ -15,13 +15,15 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { NavUser } from "./nav-user";
 import { Users } from 'lucide-react';
-
+import Link from "next/link";
+import Image from "next/image";
 
 // Menu items.
 
@@ -29,38 +31,42 @@ const items = [
   {
     title: "dashboard",
     icon: Home,
-    url: "#",
+    hrel: "/dashboard/admin",
   },
   {
     title: "Students",
     icon: Users,
-    url: "#",
+    hrel: "/dashboard/list/students",
   },
   {
     title: "Teachers",
     icon: GraduationCap,
-    url: "#",
+    hrel: "/dashboard/list/teachers",
   },
   {
     title: "Classes",
     icon: FileSliders,
-    url: "#",
+    hrel: "/dashboard/list/classes",
   },
   {
     title: "Subjects",
     icon: BookOpenText,
-    url: "#",
+    hrel: "/dashboard/list/subjects",
   },
   {
     title: "Attendance",
     icon: ContactRound,
-    url: "#",
+    hrel: "/dashboard/list/attendance",
   }
 ];
 
 export function AppSidebar() {
   return (
     <Sidebar side="left" className="h-screen">
+      <SidebarHeader className="flex flex-row justify-start items-center gap-4">
+        <Image src="/logo.png" alt="" width={30} height={30}/>
+        <h2 className="">Joy School</h2>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
@@ -69,10 +75,10 @@ export function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <Link href={item.hrel}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
