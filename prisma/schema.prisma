@@ -1,0 +1,134 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
+
+model Teacher {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  password  String
+  firstName String
+  lastName  String
+  phone     String?
+  address   String?
+  img       String?
+  sex       String?
+  birthday  DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  // Relations
+  classes   Class[]    @relation("TeacherClasses")
+  students  Student[]  @relation("TeacherStudents")
+  subjects  Subject[]  @relation("SubjectTeacher")
+  schedules Schedule[] @relation("TeacherSchedules")
+}
+
+model Student {
+  id        Int       @id @default(autoincrement())
+  firstName String
+  lastName  String
+  phone     String?
+  address   String?
+  img       String?
+  sex       String?
+  birthday  DateTime?
+  biometric String? // Biometric ID or code from scanner
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  class      Class?       @relation(fields: [classId], references: [id])
+  classId    String?
+  teacher    Teacher?     @relation("TeacherStudents", fields: [teacherId], references: [id])
+  teacherId  Int?
+  subjects   Subject[]    @relation("SubjectStudent")
+  attendance Attendance[]
+}
+
+model Class {
+  id        String   @id @default(uuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  students  Student[]
+  teachers  Teacher[]  @relation("TeacherClasses")
+  schedules Schedule[]
+}
+
+model Subject {
+  id        String   @id @default(uuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  students  Student[]  @relation("SubjectStudent")
+  teachers  Teacher[]  @relation("SubjectTeacher")
+  schedules Schedule[]
+}
+
+model Attendance {
+  id        String           @id @default(uuid())
+  date      DateTime
+  status    AttendanceStatus
+  createdAt DateTime         @default(now())
+
+  // Relations
+  student   Student @relation(fields: [studentId], references: [id])
+  studentId Int
+}
+
+model Schedule {
+  id        String  @id @default(uuid())
+  dayOfWeek WeekDay
+  startTime String
+  endTime   String
+
+  class   Class?  @relation(fields: [classId], references: [id])
+  classId String?
+
+  subject   Subject? @relation(fields: [subjectId], references: [id])
+  subjectId String?
+
+  teacher   Teacher? @relation("TeacherSchedules", fields: [teacherId], references: [id])
+  teacherId Int?
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+  EXCUSED
+}
+
+enum WeekDay {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
