@@ -1,95 +1,114 @@
-"use client"
+// "use client";
 
-import { z } from "zod"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
+// import { userCreate } from "@/lib/action";
+// import { UserStudent, userStudent } from "@/lib/zod";
+// import { zodResolver } from "@hookform/resolvers/zod";
+// import { useForm } from "react-hook-form";
+// import { toast } from "sonner"
 
-import { Button } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+// export default function StudentForm() {
+//   const {
+//     register,
+//     handleSubmit,
+//     formState: { errors },
+//   } = useForm({
+//     resolver: zodResolver(userStudent),
+//   });
 
-// ✅ Define the schema
-const studentSchema = z.object({
-  firstName: z.string().min(2, { message: "First name must be at least 2 characters." }),
-  lastName: z.string().min(2, { message: "Last name must be at least 2 characters." }),
-  phone: z.string().optional(),
-})
+//    const onSubmit = async (data: UserStudent) => {
+//     try {
+//       await userCreate(data);
+//       toast("✅ Event has been created.", {
+//         className: "text-green-600",
+//       });
+//     } catch (error) {
+//       toast.error("❌ Failed to create event.", {
+//         className: "bg-red-600 text-white",
+//       });
+//       console.error(error);
+//     }
+//   };
 
-// ✅ Define the form component
-export function ProfileForm() {
-  const form = useForm<z.infer<typeof studentSchema>>({
-    resolver: zodResolver(studentSchema),
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      phone: "",
-    },
-  })
-
-  function onSubmit(values: z.infer<typeof studentSchema>) {
-    console.log(values)
-  }
-
-  return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-
-        {/* First Name */}
-        <FormField
-          control={form.control}
-          name="firstName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>First Name</FormLabel>
-              <FormControl>
-                <Input placeholder="John" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        {/* Last Name */}
-        <FormField
-          control={form.control}
-          name="lastName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Last Name</FormLabel>
-              <FormControl>
-                <Input placeholder="Doe" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        {/* Phone */}
-        <FormField
-          control={form.control}
-          name="phone"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Phone</FormLabel>
-              <FormControl>
-                <Input placeholder="012345678" {...field} />
-              </FormControl>
-              <FormDescription>Optional</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <Button type="submit">Submit</Button>
-      </form>
-    </Form>
-  )
-}
+//   return (
+//     <div>
+//       <form
+//         onSubmit={handleSubmit(onSubmit)}
+//         className="flex flex-col gap-2 rounded p-8 ring-1"
+//       >
+//         <h1 className="text-2xl font-bold">Form Sign</h1>
+//         <label>FirstName</label>
+//         <input
+//           {...register("firstname")}
+//           type="firstname"
+//           placeholder="firstName here..."
+//           className="ring-1 rounded p-2"
+//         />
+//         <label>LastName</label>
+//         {errors.firstname && (
+//           <span className="text-red-500">{errors.firstname.message}</span>
+//         )}
+//         <input
+//           {...register("lastname")}
+//           type="lastname"
+//           placeholder="lastName here..."
+//           className="ring-1 rounded p-2"
+//         />
+//         {errors.lastname && (
+//           <span className="text-red-500">{errors.lastname.message}</span>
+//         )}
+//         {errors.sex && (
+//           <span className="text-red-500">{errors.sex.message}</span>
+//         )}
+//         <label>Phone</label>
+//         <input
+//           {...register("phone")}
+//           type="phone"
+//           placeholder="phone here..."
+//           className="ring-1 rounded p-2"
+//         />
+//         {errors.phone && (
+//           <span className="text-red-500">{errors.phone.message}</span>
+//         )}
+//         <label>Address</label>
+//         <input
+//           {...register("address")}
+//           type="address"
+//           placeholder="Address here..."
+//           className="ring-1 rounded p-2"
+//         />
+//         {errors.address && (
+//           <span className="text-red-500">{errors.address.message}</span>
+//         )}
+//         <label>Image</label>
+//          <input name="image" type="file" accept="image/*"  />
+//         <label>Sex</label>
+//         <select
+//           {...register("sex")}
+//           defaultValue=""
+//           className="ring-1 rounded p-2"
+//         >
+//           <option value="">Select gender</option>
+//           <option value="MALE">Male</option>
+//           <option value="FEMALE">Female</option>
+//         </select>
+//         {errors.sex && (
+//           <span className="text-red-500">{errors.sex.message}</span>
+//         )}
+//         <label>Biometric</label>
+//         <input name="biometric" type="file" accept=".png,.jpg,.jpeg,.dat" />
+//         <label>Birthday</label>
+//         <input
+//           {...register("birthday")}
+//           type="date"
+//           className="ring-1 rounded p-2"
+//         />
+//         <button
+//           type="submit"
+//           className="bg-green-800 text-white p-2 rounded w-full hover:bg-green-400 transition duration-300 ease-in-out"
+//         >
+//           Submit
+//         </button>
+//       </form>
+//     </div>
+//   );
+// }

@@ -4,6 +4,15 @@ CREATE TYPE "AttendanceStatus" AS ENUM ('PRESENT', 'ABSENT', 'LATE', 'EXCUSED');
 -- CreateEnum
 CREATE TYPE "WeekDay" AS ENUM ('MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY');
 
+-- CreateEnum
+CREATE TYPE "Gender" AS ENUM ('MALE', 'FEMALE');
+
+-- CreateEnum
+CREATE TYPE "Role" AS ENUM ('ADMIN', 'TEACHER', 'STUDENT');
+
+-- CreateEnum
+CREATE TYPE "Status" AS ENUM ('ACTIVE', 'INACTIVE');
+
 -- CreateTable
 CREATE TABLE "Admin" (
     "id" SERIAL NOT NULL,
@@ -37,12 +46,12 @@ CREATE TABLE "Student" (
     "id" SERIAL NOT NULL,
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
-    "phone" TEXT,
-    "address" TEXT,
-    "img" TEXT,
-    "sex" TEXT,
-    "birthday" TIMESTAMP(3),
-    "biometric" TEXT,
+    "phone" TEXT NOT NULL,
+    "address" TEXT NOT NULL,
+    "img" TEXT NOT NULL,
+    "sex" "Gender" NOT NULL,
+    "biometric" TEXT NOT NULL,
+    "birthday" TIMESTAMP(3) NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "classId" TEXT,

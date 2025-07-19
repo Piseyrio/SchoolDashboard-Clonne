@@ -1,102 +1,168 @@
-"use client";
+"use client"
 
+import * as React from "react"
 import {
-  Home,
+  AudioWaveform,
+  Command,
+  Frame,
+  GalleryVerticalEnd,
   GraduationCap,
-  FileSliders,
-  BookOpenText,
-  ContactRound,
-} from "lucide-react";
+  LayoutDashboard,
+  Map,
+  NotepadText,
+  PieChart,
+} from "lucide-react"
 
+import { NavMain } from "@/components/nav-main"
+import { NavProjects } from "@/components/nav-projects"
+import { NavUser } from "@/components/nav-user"
+import { TeamSwitcher } from "@/components/team-switcher"
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "@/components/ui/sidebar";
-import { NavUser } from "./nav-user";
-import { Users } from 'lucide-react';
-import Link from "next/link";
-import Image from "next/image";
+  SidebarRail,
+} from "@/components/ui/sidebar"
+import { UserPlus, Users } from "lucide-react"
 
-// Menu items.
+// This is sample data.
+const data = {
+  user: {
+    name: "shadcn",
+    email: "m@example.com",
+    avatar: "/avatars/shadcn.jpg",
+  },
+  teams: [
+    {
+      name: "Acme Inc",
+      logo: GalleryVerticalEnd,
+      plan: "Enterprise",
+    },
+    {
+      name: "Acme Corp.",
+      logo: AudioWaveform,
+      plan: "Startup",
+    },
+    {
+      name: "Evil Corp.",
+      logo: Command,
+      plan: "Free",
+    },
+  ],
+  navMain: [
+    {
+      title: "Dashboard",
+      url: "#",
+      icon: LayoutDashboard ,
+      isActive: true,
+      items: [
+        {
+          title: "History",
+          url: "#",
+        },
+      ],
+    },
+    {
+      title: "Students",
+      url: "#",
+      icon: Users,
+      items: [
+        {
+          title: "Add New Student",
+          url: "#",
+          icon:UserPlus,
+        },
+        {
+          title: "My Students",
+          url: "/dashboard/list/students",
+        },
+        {
+          title: "All Students",
+          url: "#",
+        },
+      ],
+    },
+    {
+      title: "Teachers",
+      url: "#",
+      icon: GraduationCap,
+      items: [
+        {
+          title: "Introduction",
+          url: "#",
+        },
+        {
+          title: "Get Started",
+          url: "#",
+        },
+        {
+          title: "Tutorials",
+          url: "#",
+        },
+        {
+          title: "Changelog",
+          url: "#",
+        },
+      ],
+    },
+    {
+      title: "Settings",
+      url: "#",
+      icon: NotepadText,
+      items: [
+        {
+          title: "General",
+          url: "#",
+        },
+        {
+          title: "Team",
+          url: "#",
+        },
+        {
+          title: "Billing",
+          url: "#",
+        },
+        {
+          title: "Limits",
+          url: "#",
+        },
+      ],
+    },
+  ],
+  projects: [
+    {
+      name: "Design Engineering",
+      url: "#",
+      icon: Frame,
+    },
+    {
+      name: "Sales & Marketing",
+      url: "#",
+      icon: PieChart,
+    },
+    {
+      name: "Travel",
+      url: "#",
+      icon: Map,
+    },
+  ],
+};
 
-const items = [
-  {
-    title: "dashboard",
-    icon: Home,
-    hrel: "/dashboard/admin",
-  },
-  {
-    title: "Students",
-    icon: Users,
-    hrel: "/dashboard/list/students",
-  },
-  {
-    title: "Teachers",
-    icon: GraduationCap,
-    hrel: "/dashboard/list/teachers",
-  },
-  {
-    title: "Classes",
-    icon: FileSliders,
-    hrel: "/dashboard/list/classes",
-  },
-  {
-    title: "Subjects",
-    icon: BookOpenText,
-    hrel: "/dashboard/list/subjects",
-  },
-  {
-    title: "Attendance",
-    icon: ContactRound,
-    hrel: "/dashboard/list/attendance",
-  }
-];
-
-export function AppSidebar() {
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar side="left" className="h-screen">
-      <SidebarHeader className="flex flex-row justify-start items-center gap-4">
-        <Image src="/logo.png" alt="" width={30} height={30}/>
-        <h2 className="">Joy School</h2>
+    <Sidebar collapsible="icon" {...props}>
+      <SidebarHeader>
+        <TeamSwitcher teams={data.teams} />
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <Link href={item.hrel}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        <NavMain items={data.navMain} />
+        <NavProjects projects={data.projects} />
       </SidebarContent>
-       
-       <SidebarFooter>
-        {/* Replace the below object with actual user data as needed */}
-        <NavUser user={{
-                  name: "",
-                  email: "",
-                  avatar: ""
-              }} />
+      <SidebarFooter>
+        <NavUser user={data.user} />
       </SidebarFooter>
+      <SidebarRail />
     </Sidebar>
-    
-    
-  );
+  )
 }

@@ -46,12 +46,12 @@ model Student {
   id        Int       @id @default(autoincrement())
   firstName String
   lastName  String
-  phone     String?
-  address   String?
-  img       String?
-  sex       String?
-  birthday  DateTime?
-  biometric String? // Biometric ID or code from scanner
+  phone     String
+  address   String
+  img       String
+  sex       Gender
+  biometric String // Biometric ID or code from scanner
+  birthday  DateTime
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -131,4 +131,20 @@ enum WeekDay {
   FRIDAY
   SATURDAY
   SUNDAY
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum Role {
+  ADMIN
+  TEACHER
+  STUDENT
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
 }
