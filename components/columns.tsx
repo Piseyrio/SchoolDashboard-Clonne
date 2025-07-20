@@ -22,11 +22,11 @@ export const columns: ColumnDef<Student>[] = [
     },
   }, 
   { accessorKey: "lastname", header: "lastname" },
-  { accessorKey: "email", header: "email" },
+  { accessorKey: "phone", header: "phone" },
   { accessorKey: "sex", header: "sex" },
   { accessorKey: "phone", header: "phone" },
-  { accessorKey: "address", header: "address" },
   {accessorKey: "birthday", header: "birthday"},
+  { accessorKey: "address", header: "address" },
 ];
 
  

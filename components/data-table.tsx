@@ -45,10 +45,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -58,6 +56,7 @@ import { UserStudent, userStudent } from "@/lib/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -116,6 +115,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="rounded-md shadow-md ">
+      {/*Filter */}
       <div className="flex items-center py-4 px-2 gap-2">
         <Input
           placeholder="Filter Name..."
@@ -154,14 +154,15 @@ export function DataTable<TData, TValue>({
                     placeholder="firstName here..."
                     className="w-full border rounded p-2"
                   />
-                </div>
-                <div>
-                  <label className="block mb-1">LastName</label>
+
                   {errors.firstname && (
                     <span className="text-red-500">
                       {errors.firstname.message}
                     </span>
                   )}
+                </div>
+                <div>
+                  <label className="block mb-1">LastName</label>
                   <input
                     {...register("lastname")}
                     type="lastname"
@@ -172,9 +173,6 @@ export function DataTable<TData, TValue>({
                     <span className="text-red-500">
                       {errors.lastname.message}
                     </span>
-                  )}
-                  {errors.sex && (
-                    <span className="text-red-500">{errors.sex.message}</span>
                   )}
                 </div>
                 <div>
@@ -202,17 +200,25 @@ export function DataTable<TData, TValue>({
                       {errors.address.message}
                     </span>
                   )}
-                  <label className="block mb-1">Image</label>
-                  <input name="image" type="file" accept="image/*" />
                 </div>
+                {/* <div>
+                  <label className="block mb-1">Image</label>
+                  <input
+                  
+                    {...register("img")}
+                    name="image"
+                    type="file"
+                    accept="image/*"
+                    className="w-full border rounded p-2"
+                  />
+                </div> */}
                 <div>
-                  <label>Sex</label>
+                  <label className="block mb-1">Sex</label>
                   <select
                     {...register("sex")}
                     defaultValue=""
                     className="w-full border rounded p-2"
                   >
-                    <option value="">Select gender</option>
                     <option value="MALE">Male</option>
                     <option value="FEMALE">Female</option>
                   </select>
@@ -220,41 +226,33 @@ export function DataTable<TData, TValue>({
                     <span className="text-red-500">{errors.sex.message}</span>
                   )}
                 </div>
-                <div>
-                  <label className="block mb-1">Biometric</label>
-                  <input
-                    name="biometric"
-                    type="file"
-                    accept=".png,.jpg,.jpeg,.dat"
-                    className="w-full border rounded p-2"
-                  />
-                </div>
+
                 <div>
                   <label className="block mb-1">Birthday</label>
                   <input
                     {...register("birthday")}
                     type="date"
                     className="w-full border rounded p-2"
-                  />
+                  />{" "}
+                  {errors.birthday && (
+                    <span className="text-red-500">
+                      {errors.birthday.message}
+                    </span>
+                  )}
                 </div>
+                <div></div>
+                <div></div>
                 <button
                   type="submit"
-                  className="bg-green-800 text-white p-2 rounded w-full hover:bg-green-400 transition duration-300 ease-in-out"
+                  className="bg-green-800 text-white py-2 px-4 rounded  hover:bg-green-600 transition duration-300 ease-in-out"
                 >
                   Submit
                 </button>
               </form>
             </div>
-
-            <DialogFooter className="sm:justify-start">
-              <DialogClose asChild>
-                <Button type="button" variant="secondary">
-                  Close
-                </Button>
-              </DialogClose>
-            </DialogFooter>
           </DialogContent>
         </Dialog>
+        {/*Select Columns*/}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
@@ -282,6 +280,7 @@ export function DataTable<TData, TValue>({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+      {/*Table*/}
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -324,6 +323,7 @@ export function DataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
+      {/*Pagination*/}
       <div className="flex items-center justify-between px-2">
         <div className="text-muted-foreground flex-1 text-sm">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}

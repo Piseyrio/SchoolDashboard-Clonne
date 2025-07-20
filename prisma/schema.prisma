@@ -43,14 +43,12 @@ model Teacher {
 }
 
 model Student {
-  id        Int       @id @default(autoincrement())
-  firstName String
-  lastName  String
+  id        Int      @id @default(autoincrement())
+  firstname String
+  lastname  String
   phone     String
   address   String
-  img       String
   sex       Gender
-  biometric String // Biometric ID or code from scanner
   birthday  DateTime
 
   createdAt DateTime @default(now())

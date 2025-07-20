@@ -3,14 +3,15 @@
 import * as React from "react"
 import {
   AudioWaveform,
+  BookOpen,
+  Bot,
   Command,
   Frame,
   GalleryVerticalEnd,
-  GraduationCap,
-  LayoutDashboard,
   Map,
-  NotepadText,
   PieChart,
+  Settings2,
+  SquareTerminal,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -24,7 +25,6 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
-import { UserPlus, Users } from "lucide-react"
 
 // This is sample data.
 const data = {
@@ -52,13 +52,21 @@ const data = {
   ],
   navMain: [
     {
-      title: "Dashboard",
+      title: "Playground",
       url: "#",
-      icon: LayoutDashboard ,
+      icon: SquareTerminal,
       isActive: true,
       items: [
         {
           title: "History",
+          url: "#",
+        },
+        {
+          title: "Starred",
+          url: "#",
+        },
+        {
+          title: "Settings",
           url: "#",
         },
       ],
@@ -66,27 +74,26 @@ const data = {
     {
       title: "Students",
       url: "#",
-      icon: Users,
+      icon: Bot,
       items: [
-        {
-          title: "Add New Student",
-          url: "#",
-          icon:UserPlus,
-        },
         {
           title: "My Students",
           url: "/dashboard/list/students",
         },
         {
-          title: "All Students",
+          title: "My Page",
+          url: "/dashboard/list/students",
+        },
+        {
+          title: "Quantum",
           url: "#",
         },
       ],
     },
     {
-      title: "Teachers",
+      title: "Documentation",
       url: "#",
-      icon: GraduationCap,
+      icon: BookOpen,
       items: [
         {
           title: "Introduction",
@@ -109,7 +116,7 @@ const data = {
     {
       title: "Settings",
       url: "#",
-      icon: NotepadText,
+      icon: Settings2,
       items: [
         {
           title: "General",

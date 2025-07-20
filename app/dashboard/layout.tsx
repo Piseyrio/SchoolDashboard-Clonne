@@ -1,5 +1,7 @@
 import { cookies } from "next/headers";
 import { SidebarProvider } from "@/components/ui/sidebar";
+import { Toaster } from "@/components/ui/sonner";
+
 
 export default async function Layout({
   children,
@@ -11,6 +13,7 @@ export default async function Layout({
   const defaultOpen = cookieStore.get("sidebar_state")?.value === "true";
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
+      <Toaster />
       {children}
     </SidebarProvider>
   );
