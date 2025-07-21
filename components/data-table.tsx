@@ -52,10 +52,10 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { userCreate } from "@/lib/action";
-import { UserStudent, userStudent } from "@/lib/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { userFakeData, UserFakeData } from "@/lib/zod";
 
 
 interface DataTableProps<TData, TValue> {
@@ -95,11 +95,11 @@ export function DataTable<TData, TValue>({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(userStudent),
+  } = useForm<UserFakeData>({
+    resolver: zodResolver(userFakeData),
   });
 
-  const onSubmit = async (data: UserStudent) => {
+  const onSubmit = async (data: UserFakeData) => {
     try {
       await userCreate(data);
       toast("✅ Event has been created.", {
@@ -133,7 +133,7 @@ export function DataTable<TData, TValue>({
           <DialogTrigger asChild>
             <Button variant="outline">Add New Students</Button>
           </DialogTrigger>
-          <DialogContent className="w-auto h-auto">
+          <DialogContent className="md:max-w-[925px]">
             <DialogHeader>
               <DialogTitle>Students Form</DialogTitle>
               <DialogDescription>
@@ -201,17 +201,16 @@ export function DataTable<TData, TValue>({
                     </span>
                   )}
                 </div>
-                {/* <div>
+                <div>
                   <label className="block mb-1">Image</label>
                   <input
-                  
                     {...register("img")}
                     name="image"
                     type="file"
                     accept="image/*"
                     className="w-full border rounded p-2"
                   />
-                </div> */}
+                </div>
                 <div>
                   <label className="block mb-1">Sex</label>
                   <select

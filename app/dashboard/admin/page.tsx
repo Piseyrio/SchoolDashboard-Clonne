@@ -1,7 +1,8 @@
 import { AppSidebar } from "@/components/app-sidebar";
+import { ChartMonthly } from "@/components/chart/chart-monthly";
+import { ChartWeekly } from "@/components/chart/chart-weekly";
 import { ModeToggle } from "@/components/dark-mode";
 import { NavUser } from "@/components/nav-user";
-import { SectionCards } from "@/components/section-cards";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -16,6 +17,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { SectionCards } from "@/components/user-card/section-cards";
 
 export default function Page() {
   return (
@@ -58,12 +60,16 @@ export default function Page() {
             />
           </div>
         </header>
-        <div className="flex flex-1 flex-col">
-          <div className="@container/main flex flex-1 flex-col gap-2">
-            <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-              <SectionCards />
+        <div className="flex flex-col">
+          <div className="@container/main flex flex-col gap-2">
+             
+            <SectionCards />
+            <div className="w-[600px] lg:px-6 md:gap-6 px-6 ">
+              <ChartWeekly />
             </div>
-            <div>hi</div>
+            <div className="lg:px-6 md:gap-6 px-6 ">
+              <ChartMonthly />
+            </div>
           </div>
         </div>
       </SidebarInset>
