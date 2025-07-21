@@ -2,16 +2,13 @@
 
 import * as React from "react"
 import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
   Frame,
   GalleryVerticalEnd,
-  Map,
+  GraduationCap,
+  LayoutDashboard,
+  NotebookPen,
   PieChart,
-  Settings2,
-  SquareTerminal,
+  User2,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -35,103 +32,57 @@ const data = {
   },
   teams: [
     {
-      name: "Acme Inc",
+      name: "Joy School",
       logo: GalleryVerticalEnd,
       plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
     },
   ],
   navMain: [
     {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
+      title: "Dashboard",
+      url: "/dashboard/admin",
+      icon: LayoutDashboard,
       isActive: true,
       items: [
         {
           title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
+          url: "/dashboard/admin",
         },
       ],
     },
     {
       title: "Students",
       url: "#",
-      icon: Bot,
+      icon: User2,
       items: [
         {
           title: "My Students",
           url: "/dashboard/list/students",
         },
         {
-          title: "My Page",
+          title: "All Students",
           url: "/dashboard/list/students",
         },
-        {
-          title: "Quantum",
-          url: "#",
-        },
       ],
     },
     {
-      title: "Documentation",
+      title: "Teachers",
       url: "#",
-      icon: BookOpen,
+      icon: GraduationCap,
       items: [
         {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
+          title: "All Teachers",
           url: "#",
         },
       ],
     },
     {
-      title: "Settings",
+      title: "Attendance",
       url: "#",
-      icon: Settings2,
+      icon: NotebookPen,
       items: [
         {
           title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
           url: "#",
         },
       ],
@@ -139,19 +90,14 @@ const data = {
   ],
   projects: [
     {
-      name: "Design Engineering",
+      name: "Classes",
       url: "#",
       icon: Frame,
     },
     {
-      name: "Sales & Marketing",
+      name: "Subjects",
       url: "#",
       icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
     },
   ],
 };
