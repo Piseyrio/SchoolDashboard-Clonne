@@ -1,5 +1,6 @@
 import { AppSidebar } from "@/components/app-sidebar";
 import { ChartMonthly } from "@/components/chart/chart-monthly";
+import { ChartPie } from "@/components/chart/chart-pie";
 import { ChartWeekly } from "@/components/chart/chart-weekly";
 import { ModeToggle } from "@/components/dark-mode";
 import { NavUser } from "@/components/nav-user";
@@ -62,14 +63,14 @@ export default function Page() {
         </header>
         <div className="flex flex-col">
           <div className="@container/main flex flex-col gap-2">
-             
             <SectionCards />
-            <div className="w-[600px] lg:px-6 md:gap-6 px-6 ">
-              <ChartWeekly />
-            </div>
-            <div className="lg:px-6 md:gap-6 px-6 ">
-              <ChartMonthly />
-            </div>
+          </div>
+          <div className="@container/main flex lg:px-6 md:gap-6 wrap p-6 ">
+            <ChartWeekly />
+            <ChartPie />
+          </div>
+          <div className="lg:px-6 md:gap-6 px-6 ">
+            <ChartMonthly />
           </div>
         </div>
       </SidebarInset>

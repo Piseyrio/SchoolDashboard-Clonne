@@ -2,8 +2,16 @@
 
 import { Button } from "@/components/ui/button";
 import { FakeData } from "@/lib/fakedata";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import Image from "next/image";
 
 // For fetch Data form prisma check database name , for FakeData check FakeData.ts at lib
@@ -60,4 +68,34 @@ export const columns: ColumnDef<FakeData>[] = [
   { accessorKey: "sex", header: "sex" },
   { accessorKey: "birthday", header: "birthday" },
   { accessorKey: "address", header: "address" },
+  {
+    id: "actions",
+    enableHiding: false,
+    cell: ({ row }) => {
+      const payment = row.original
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <MoreHorizontal />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            align="end"
+          >
+            <DropdownMenuLabel className="text-red-500">Actions</DropdownMenuLabel>
+            <DropdownMenuItem
+              onClick={() => navigator.clipboard.writeText(payment.id)}
+            >
+              Copy payment ID
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="text-green-500">Edit</DropdownMenuItem>
+            <DropdownMenuItem >Details</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
+    },
+  },
 ];
